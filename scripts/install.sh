@@ -53,8 +53,9 @@ echo -e "${GREEN}✓${NC} Installed 3 agents to ~/.claude/agents/"
 
 # Copy skill
 echo "⚡ Installing /benchmark-agent skill..."
-cp "$REPO_DIR/skill/benchmark-agent.md" "$CLAUDE_DIR/skills/agent-benchmark/"
-echo -e "${GREEN}✓${NC} Installed skill to ~/.claude/skills/agent-benchmark/"
+mkdir -p "$CLAUDE_DIR/skills/benchmark-agent"
+cp "$REPO_DIR/skills/benchmark-agent/SKILL.md" "$CLAUDE_DIR/skills/benchmark-agent/"
+echo -e "${GREEN}✓${NC} Installed skill to ~/.claude/skills/benchmark-agent/"
 
 # Copy templates
 echo "📋 Installing templates..."

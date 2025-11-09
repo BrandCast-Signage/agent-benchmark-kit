@@ -36,8 +36,8 @@ We're still very early, but the approach shows promise. We're open-sourcing what
 ## Quick Start
 
 ```bash
-# 1. Install via Claude Code
-/plugin marketplace add https://github.com/BrandCast-Signage/agent-benchmark-kit
+# 1. Install via Claude Code Marketplace
+/plugin add https://github.com/BrandCast-Signage/agent-benchmark-kit
 
 # 2. Create your first benchmark
 /benchmark-agent --create my-agent
@@ -226,23 +226,31 @@ Reviews TypeScript code for style violations and best practices.
 ### Prerequisites
 
 - [Claude Code](https://claude.com/claude-code) installed
-- Git
-- Bash (Linux/macOS) or Git Bash (Windows)
+- Git (for manual installation only)
 
-### Option 1: Add via Claude Code Plugin Marketplace (Recommended)
+### Option 1: Plugin Marketplace (Recommended)
 
 ```bash
 # In Claude Code, run:
-/plugin marketplace add https://github.com/BrandCast-Signage/agent-benchmark-kit
+/plugin add https://github.com/BrandCast-Signage/agent-benchmark-kit
 ```
 
-This will:
-1. Clone the repository
-2. Install skill and agents automatically
-3. Set up templates and examples
-4. Create `~/.agent-benchmarks/` directory
+This will automatically:
+1. Install the plugin with all components
+2. Make `/benchmark-agent` command available
+3. Install 3 benchmark agents
+4. Set up templates in your project
+
+**Note:** After installation, you'll need to create the `~/.agent-benchmarks/` directory for test suites:
+
+```bash
+mkdir -p ~/.agent-benchmarks/{templates,examples}
+cp ~/.claude/plugins/agent-benchmark-kit/templates/* ~/.agent-benchmarks/templates/
+```
 
 ### Option 2: Install Script
+
+For a complete setup including examples and templates:
 
 ```bash
 git clone https://github.com/BrandCast-Signage/agent-benchmark-kit.git
@@ -251,12 +259,12 @@ cd agent-benchmark-kit
 ```
 
 The install script:
-1. Copies skill to `.claude/skills/agent-benchmark/`
-2. Copies agents to `.claude/agents/`
+1. Copies agents to `.claude/agents/`
+2. Copies skill to `.claude/skills/benchmark-agent/`
 3. Creates `~/.agent-benchmarks/` directory
 4. Sets up templates and examples
 
-### Manual Installation
+### Option 3: Manual Installation
 
 See [docs/getting-started.md](docs/getting-started.md) for manual setup instructions.
 

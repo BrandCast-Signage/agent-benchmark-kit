@@ -14,7 +14,21 @@ This guide will walk you through installing the framework, creating your first b
 
 ## Installation
 
-### Quick Install
+### Option 1: Plugin Marketplace (Recommended)
+
+```bash
+# In Claude Code, run:
+/plugin add https://github.com/BrandCast-Signage/agent-benchmark-kit
+```
+
+This will automatically install all components. Then set up the benchmarks directory:
+
+```bash
+mkdir -p ~/.agent-benchmarks/{templates,examples}
+cp ~/.claude/plugins/agent-benchmark-kit/templates/* ~/.agent-benchmarks/templates/
+```
+
+### Option 2: Install Script
 
 ```bash
 # Clone the repository
@@ -31,19 +45,19 @@ The installer will:
 - Set up templates in `~/.agent-benchmarks/`
 - Optionally install example benchmarks
 
-### Manual Install
+### Option 3: Manual Install
 
 If you prefer manual installation:
 
 ```bash
 # Create directories
 mkdir -p ~/.claude/agents
-mkdir -p ~/.claude/skills/agent-benchmark
+mkdir -p ~/.claude/skills/benchmark-agent
 mkdir -p ~/.agent-benchmarks/{templates,examples,registries}
 
 # Copy files
 cp agents/*.md ~/.claude/agents/
-cp skill/benchmark-agent.md ~/.claude/skills/agent-benchmark/
+cp skills/benchmark-agent/SKILL.md ~/.claude/skills/benchmark-agent/
 cp templates/*.{md,json,yml} ~/.agent-benchmarks/templates/
 ```
 
