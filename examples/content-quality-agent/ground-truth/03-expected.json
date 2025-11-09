@@ -1,0 +1,184 @@
+{
+  "test_id": "test-03",
+  "test_name": "Broken Citations (Content Integrity)",
+  "description": "Validate that agent enforces citation requirements for statistics and claims",
+
+  "expected_result": "fix_required",
+
+  "expected_issues": {
+    "critical": [
+      "statistics_without_sources",
+      "vague_attributions",
+      "unverified_company_claims"
+    ],
+    "warnings": [],
+    "suggestions": []
+  },
+
+  "must_catch_issues": [
+    "Multiple statistics without source links (violates content integrity)",
+    "Vague attributions ('industry experts', 'marketing professors', 'analysts') without specific sources",
+    "Claims about specific companies (Best Buy) without links to verify",
+    "Repeated statistics (83% recall mentioned twice) without consistent citation"
+  ],
+
+  "content_integrity_violations": [
+    {
+      "line_approx": 10,
+      "claim": "Retailers using digital signage see an average sales increase of 40%",
+      "issue": "No source link provided",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 12,
+      "claim": "70% of customers make purchasing decisions in-store",
+      "issue": "No source link",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 12,
+      "claim": "digital displays influence 60% of those decisions",
+      "issue": "No source link",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 12,
+      "claim": "increases product awareness by 47%",
+      "issue": "No source link",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 14,
+      "claim": "According to retail industry experts...",
+      "issue": "Vague attribution - who? which experts? link?",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 14,
+      "claim": "customers spend an average of $3.50 more per transaction",
+      "issue": "No source",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 14,
+      "claim": "some chains seeing $5-7 increases",
+      "issue": "No source or specifics",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 20,
+      "claim": "Digital displays capture attention 400% more effectively",
+      "issue": "No source",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 22,
+      "claim": "Research from marketing professors at leading universities confirms that motion in advertising increases recall by 83%",
+      "issue": "Which professors? Which universities? Link to research?",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 30,
+      "claim": "customers spend 30% more time in areas with digital displays",
+      "issue": "No source",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 32,
+      "claim": "customers interacting with digital kiosks spent an average of 4.5 minutes",
+      "issue": "No source - which study?",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 38,
+      "claim": "A national clothing retailer increased impulse purchases by 35%",
+      "issue": "Which retailer? Source?",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 40,
+      "claim": "One grocery chain reported... 53% increase",
+      "issue": "Which chain? Source?",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 42,
+      "claim": "Best Buy executives stated...",
+      "issue": "No link to actual statement/report",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 50,
+      "claim": "average payback period for digital signage is 6-12 months",
+      "issue": "No source",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 58,
+      "claim": "Industry analysts estimate that retailers see an average ROI of 300%",
+      "issue": "Which analysts? Source?",
+      "severity": "critical"
+    }
+  ],
+
+  "expected_fixes": [
+    "Add source links for ALL statistics (40%, 70%, 60%, 47%, 35%, 53%, 83%, 300%, etc.)",
+    "Replace vague attributions ('industry experts', 'marketing professors') with specific sources and links",
+    "Link to Best Buy report/statement or remove the claim",
+    "For unnamed examples ('one grocery chain', 'national clothing retailer'), either provide specific named company with link OR remove specific claims and use hypothetical examples instead",
+    "Add footnotes or inline citations throughout the document"
+  ],
+
+  "validation_checks": {
+    "has_cited_statistics": {
+      "expected": "all statistics have source links",
+      "actual": "0 statistics cited out of 15+",
+      "status": "fail"
+    },
+    "has_specific_attributions": {
+      "expected": "specific sources, not vague references",
+      "actual": "multiple vague attributions ('experts', 'professors', 'analysts')",
+      "status": "fail"
+    },
+    "verifiable_claims": {
+      "expected": "company claims have verification links",
+      "actual": "Best Buy claim unverified",
+      "status": "fail"
+    }
+  },
+
+  "expected_agent_decision": "cannot_publish",
+  "expected_agent_message": "CRITICAL: Content integrity violations. This post contains 15+ statistics and claims without source links. This violates content integrity policy. Each statistic needs a verifiable source link before publishing.",
+
+  "scoring_notes": {
+    "perfect_score_criteria": [
+      "Identifies that multiple statistics lack sources (doesn't need to count exact number)",
+      "Flags vague attributions as problematic",
+      "Recognizes this as a content integrity issue",
+      "Decision is cannot_publish/fix_required",
+      "Provides guidance on how to fix (add citations)"
+    ],
+
+    "common_mistakes": [
+      "Missing the citation issue entirely (-25 pts - this is the main test)",
+      "Only flagging some statistics, not recognizing pattern (-10 pts)",
+      "Not recognizing vague attributions as a problem (-5 pts)",
+      "Approving content despite citation issues (-20 pts)",
+      "Not providing specific fix guidance (-5 pts)"
+    ],
+
+    "edge_cases": [
+      "Agent doesn't need to count exact statistics (approximate is fine)",
+      "Agent may also flag other issues (OK)",
+      "Different terminology for citations acceptable (sources, references, links)"
+    ]
+  },
+
+  "metadata": {
+    "difficulty": "medium",
+    "category": "content_integrity",
+    "real_world_scenario": "Marketing content with impressive statistics but no attribution - common issue that damages credibility",
+    "created": "2025-11-09",
+    "last_modified": "2025-11-09"
+  }
+}

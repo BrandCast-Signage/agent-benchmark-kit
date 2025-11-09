@@ -1,0 +1,70 @@
+{
+  "test_id": "test-01",
+  "test_name": "Perfect TypeScript Code",
+  "description": "Baseline test - agent must NOT flag valid code (no false positives)",
+
+  "expected_result": "approved",
+
+  "expected_issues": {
+    "critical": [],
+    "warnings": [],
+    "suggestions": []
+  },
+
+  "must_catch_issues": [],
+
+  "validation_checks": {
+    "naming_conventions": {
+      "expected": "all names follow TypeScript conventions",
+      "status": "pass"
+    },
+    "import_organization": {
+      "expected": "imports grouped and sorted correctly",
+      "status": "pass"
+    },
+    "type_annotations": {
+      "expected": "all types explicitly annotated",
+      "status": "pass"
+    },
+    "code_formatting": {
+      "expected": "consistent spacing and structure",
+      "status": "pass"
+    },
+    "best_practices": {
+      "expected": "uses const/let appropriately, proper structure",
+      "status": "pass"
+    }
+  },
+
+  "expected_agent_decision": "approve",
+  "expected_agent_message": "All code review checks passed. Code follows TypeScript best practices and style guidelines.",
+
+  "scoring_notes": {
+    "perfect_score_criteria": [
+      "No false positives (CRITICAL)",
+      "Agent correctly identifies this as valid code",
+      "No incorrect flags or suggestions",
+      "Decision is 'approved' or equivalent"
+    ],
+
+    "automatic_fail_if": [
+      "Agent flags any issues on this valid code",
+      "Decision is anything other than 'approve/pass'",
+      "Suggests unnecessary changes"
+    ],
+
+    "edge_cases": [
+      "Agent may optionally suggest minor improvements (OK)",
+      "Agent may provide positive feedback (OK)",
+      "But must NOT flag anything as requiring fixes"
+    ]
+  },
+
+  "metadata": {
+    "difficulty": "easy",
+    "category": "baseline_validation",
+    "real_world_scenario": "Well-written TypeScript following all conventions",
+    "created": "2025-11-09",
+    "last_modified": "2025-11-09"
+  }
+}

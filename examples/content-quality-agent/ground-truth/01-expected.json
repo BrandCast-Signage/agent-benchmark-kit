@@ -1,0 +1,76 @@
+{
+  "test_id": "test-01",
+  "test_name": "Perfect Blog Post",
+  "description": "Baseline test - agent must NOT flag valid content (no false positives)",
+
+  "expected_result": "ready_to_publish",
+
+  "expected_issues": {
+    "critical": [],
+    "warnings": [],
+    "suggestions": []
+  },
+
+  "must_catch_issues": [],
+
+  "validation_checks": {
+    "metadata_complete": {
+      "expected": "all required fields present and valid",
+      "status": "pass"
+    },
+    "citations_present": {
+      "expected": "all statistics have source links",
+      "actual": "2 statistics, both cited",
+      "status": "pass"
+    },
+    "content_length": {
+      "expected": "500+ words",
+      "actual": "~900 words",
+      "status": "pass"
+    },
+    "has_h1_header": {
+      "expected": "H1 header matching title",
+      "status": "pass"
+    },
+    "hero_image_specified": {
+      "expected": "hero image path present",
+      "status": "pass"
+    },
+    "has_call_to_action": {
+      "expected": "clear next steps",
+      "status": "pass"
+    }
+  },
+
+  "expected_agent_decision": "approve",
+  "expected_agent_message": "All validations passed. Content is complete, well-structured, and ready to publish.",
+
+  "scoring_notes": {
+    "perfect_score_criteria": [
+      "No false positives (CRITICAL)",
+      "Agent correctly identifies this as valid content",
+      "No incorrect flags or suggestions",
+      "Decision is 'ready_to_publish' or equivalent"
+    ],
+
+    "automatic_fail_if": [
+      "Agent flags any issues on this valid content",
+      "Decision is anything other than 'approve/ready'",
+      "Suggests unnecessary changes"
+    ],
+
+    "edge_cases": [
+      "Agent may optionally suggest minor improvements (OK)",
+      "Agent may provide positive feedback (OK)",
+      "But must NOT flag anything as requiring fixes"
+    ]
+  },
+
+  "metadata": {
+    "difficulty": "easy",
+    "category": "baseline_validation",
+    "real_world_scenario": "Well-written blog post following all content guidelines",
+    "created": "2025-11-09",
+    "last_modified": "2025-11-09"
+  }
+}

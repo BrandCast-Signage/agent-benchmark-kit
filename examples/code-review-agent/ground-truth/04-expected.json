@@ -1,0 +1,193 @@
+{
+  "test_id": "test-04",
+  "test_name": "Type Annotation Issues",
+  "description": "Validate that agent detects missing and weak type annotations",
+
+  "expected_result": "fix_required",
+
+  "expected_issues": {
+    "critical": [
+      "missing_return_type_annotations",
+      "missing_parameter_types",
+      "using_any_type",
+      "implicit_any_types"
+    ],
+    "warnings": [],
+    "suggestions": [
+      "add_explicit_return_types",
+      "add_parameter_types",
+      "replace_any_with_specific_types"
+    ]
+  },
+
+  "must_catch_issues": [
+    "Using 'any' type for metadata property in AuthResult interface",
+    "Missing type annotation for sessionTimeout constructor parameter",
+    "Missing return type for authenticate method",
+    "Missing return type for verifyPassword method",
+    "Missing parameter types for verifyPassword method (password, hash)",
+    "Missing return type for generateToken method",
+    "Missing return type for calculateExpiration method",
+    "Using Promise<any> return type for getUserMetadata (should be specific type)",
+    "Missing return type for refreshToken method",
+    "Missing parameter type for oldToken parameter",
+    "Missing return type for createAuthenticationHandler function",
+    "Missing parameter types for handler (req, res)",
+    "Missing return type for handler function",
+    "Missing parameter type and return type for validateToken function"
+  ],
+
+  "type_violations": [
+    {
+      "line_approx": 21,
+      "identifier": "metadata",
+      "issue": "Using 'any' type instead of explicit type definition",
+      "expected": "Define specific metadata type",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 34,
+      "identifier": "sessionTimeout parameter",
+      "issue": "Missing type annotation",
+      "expected": "sessionTimeout: number",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 40,
+      "identifier": "authenticate method",
+      "issue": "Missing return type annotation",
+      "expected": ": Promise<AuthResult>",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 80,
+      "identifier": "verifyPassword method",
+      "issue": "Missing return type and parameter types",
+      "expected": "(password: string, hash: string): Promise<boolean>",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 85,
+      "identifier": "generateToken method",
+      "issue": "Missing return type",
+      "expected": ": Promise<string>",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 90,
+      "identifier": "calculateExpiration method",
+      "issue": "Missing return type",
+      "expected": ": Date",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 96,
+      "identifier": "getUserMetadata method",
+      "issue": "Using Promise<any> instead of specific type",
+      "expected": "Define UserMetadata type and use Promise<UserMetadata>",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 104,
+      "identifier": "refreshToken method",
+      "issue": "Missing parameter type and return type",
+      "expected": "(oldToken: string): Promise<string>",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 111,
+      "identifier": "createAuthenticationHandler function",
+      "issue": "Missing return type",
+      "expected": ": (req: Request, res: Response) => Promise<void>",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 113,
+      "identifier": "handler function parameters",
+      "issue": "Missing parameter types (req, res)",
+      "expected": "(req: Request, res: Response): Promise<void>",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 141,
+      "identifier": "validateToken function",
+      "issue": "Missing parameter type and return type",
+      "expected": "(token: string): boolean",
+      "severity": "critical"
+    }
+  },
+
+  "expected_fixes": [
+    "Add explicit return type to authenticate method: Promise<AuthResult>",
+    "Add type annotation to sessionTimeout constructor parameter: number",
+    "Replace 'any' in AuthResult.metadata with specific type (e.g., UserMetadata)",
+    "Add parameter types and return type to verifyPassword: (password: string, hash: string): Promise<boolean>",
+    "Add return type to generateToken: Promise<string>",
+    "Add return type to calculateExpiration: Date",
+    "Replace Promise<any> in getUserMetadata with specific type",
+    "Add parameter type and return type to refreshToken: (oldToken: string): Promise<string>",
+    "Add return type to createAuthenticationHandler",
+    "Add parameter types to handler function: (req: Request, res: Response): Promise<void>",
+    "Add parameter type and return type to validateToken: (token: string): boolean",
+    "Define explicit types instead of using 'any'"
+  ],
+
+  "validation_checks": {
+    "return_types": {
+      "expected": "all functions have explicit return types",
+      "actual": "multiple functions missing return types",
+      "status": "fail"
+    },
+    "parameter_types": {
+      "expected": "all parameters have explicit types",
+      "actual": "multiple parameters missing types",
+      "status": "fail"
+    },
+    "no_any_types": {
+      "expected": "no usage of 'any' type",
+      "actual": "using 'any' in multiple locations",
+      "status": "fail"
+    },
+    "no_implicit_any": {
+      "expected": "no implicit 'any' types",
+      "actual": "implicit 'any' from missing annotations",
+      "status": "fail"
+    }
+  },
+
+  "expected_agent_decision": "cannot_approve",
+  "expected_agent_message": "Found 10+ type annotation issues. TypeScript requires explicit types for type safety. Add return types to all methods, parameter types to all parameters, and replace 'any' with specific types.",
+
+  "scoring_notes": {
+    "perfect_score_criteria": [
+      "Identifies missing return type annotations (multiple functions)",
+      "Identifies missing parameter types (multiple parameters)",
+      "Flags usage of 'any' type as problematic",
+      "Recognizes pattern of weak typing throughout file",
+      "Decision is cannot_approve/fix_required",
+      "Provides specific guidance on adding types"
+    ],
+
+    "common_mistakes": [
+      "Missing the type annotation issues entirely (-30 pts)",
+      "Only flagging 'any' usage, not missing annotations (-15 pts)",
+      "Not recognizing implicit 'any' from missing types (-10 pts)",
+      "Approving code despite type issues (-25 pts)",
+      "Not providing specific type annotation examples (-5 pts)"
+    ],
+
+    "edge_cases": [
+      "Agent doesn't need to count exact violations (approximate is fine)",
+      "Agent may prioritize different violations (OK)",
+      "Key is recognizing the pattern and requiring explicit types"
+    ]
+  },
+
+  "metadata": {
+    "difficulty": "medium",
+    "category": "type_annotations",
+    "real_world_scenario": "JavaScript code migrated to TypeScript without adding proper type annotations",
+    "created": "2025-11-09",
+    "last_modified": "2025-11-09"
+  }
+}

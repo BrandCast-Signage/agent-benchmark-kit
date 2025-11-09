@@ -1,0 +1,157 @@
+{
+  "test_id": "test-05",
+  "test_name": "Multiple Violations (Comprehensive)",
+  "description": "Comprehensive test - agent must detect naming, import, type, and formatting issues",
+
+  "expected_result": "fix_required",
+
+  "expected_issues": {
+    "critical": [
+      "naming_violations",
+      "import_organization",
+      "type_annotation_issues",
+      "formatting_issues",
+      "best_practice_violations"
+    ],
+    "warnings": [],
+    "suggestions": []
+  },
+
+  "must_catch_issues": [
+    "Multiple naming violations (snake_case constants, camelCase class, etc.)",
+    "Disorganized imports (not grouped or sorted)",
+    "Missing type annotations on methods and parameters",
+    "Using 'any' type",
+    "Using 'var' instead of const/let",
+    "Using 'let' for non-reassigned variables",
+    "Inconsistent spacing and formatting",
+    "Missing readonly modifiers on class properties"
+  ],
+
+  "violation_categories": {
+    "naming": [
+      "max_retry using snake_case (should be MAX_RETRY)",
+      "timeout using lowercase (should be TIMEOUT_MS or DEFAULT_TIMEOUT)",
+      "user_creds using snake_case (should be UserCredentials)",
+      "auth_result using snake_case (should be AuthResult)",
+      "authService using camelCase (should be AuthService)",
+      "db_service, session_time using snake_case",
+      "login_user, check_password, make_token, get_expiry using snake_case",
+      "make_handler using snake_case",
+      "check_token using snake_case"
+    ],
+    "imports": [
+      "Imports not sorted alphabetically",
+      "Local and third-party imports mixed together",
+      "No grouping by import type"
+    ],
+    "types": [
+      "data?: any in auth_result type",
+      "Missing return type on login_user method",
+      "Missing parameter types on check_password (pwd, hash)",
+      "Missing return types on make_token, get_expiry",
+      "Missing parameter types and return type on make_handler",
+      "Missing parameter types (req, res) on handler",
+      "Missing types on check_token function"
+    ],
+    "formatting": [
+      "Inconsistent spacing in refresh method: 'old_token:string' missing space",
+      "Single line method with no spacing: refresh(old_token:string){return'new-token';}",
+      "check_token has no spacing: if(!tok)return false;return true;"
+    ],
+    "best_practices": [
+      "Using 'var' for token and expires (should use const)",
+      "Using 'let' for is_valid (never reassigned, should use const)",
+      "Using 'let' for expiry_time (never reassigned, should use const)",
+      "Missing 'readonly' modifier on db_service",
+      "Type assertion without validation in handler: const creds = req.body;"
+    ]
+  },
+
+  "expected_fixes": [
+    "NAMING: Rename all identifiers to follow TypeScript conventions",
+    "  - Constants: MAX_RETRY, DEFAULT_TIMEOUT",
+    "  - Classes/Interfaces/Types: AuthService, UserCredentials, AuthResult",
+    "  - Methods/Variables/Functions: loginUser, checkPassword, makeToken, etc.",
+    "IMPORTS: Reorganize and sort imports",
+    "  - Group: built-in → third-party → local",
+    "  - Sort alphabetically within each group",
+    "TYPES: Add explicit type annotations",
+    "  - Add return types to all methods",
+    "  - Add parameter types to all parameters",
+    "  - Replace 'any' with specific types",
+    "FORMATTING: Fix spacing and structure",
+    "  - Add proper spacing around colons and braces",
+    "  - Break single-line methods into readable format",
+    "  - Consistent indentation and line breaks",
+    "BEST PRACTICES:",
+    "  - Replace 'var' with const/let (prefer const)",
+    "  - Use const for non-reassigned variables",
+    "  - Add readonly modifier to immutable class properties",
+    "  - Validate types before casting (Zod schema or type guard)"
+  ],
+
+  "validation_checks": {
+    "naming_conventions": {
+      "expected": "TypeScript naming conventions",
+      "actual": "15+ naming violations",
+      "status": "fail"
+    },
+    "import_organization": {
+      "expected": "grouped and sorted",
+      "actual": "disorganized",
+      "status": "fail"
+    },
+    "type_annotations": {
+      "expected": "all types explicit",
+      "actual": "10+ missing annotations, using 'any'",
+      "status": "fail"
+    },
+    "code_formatting": {
+      "expected": "consistent spacing and structure",
+      "actual": "inconsistent, compressed code",
+      "status": "fail"
+    },
+    "best_practices": {
+      "expected": "const/let, readonly, validation",
+      "actual": "using var, missing readonly, no validation",
+      "status": "fail"
+    }
+  },
+
+  "expected_agent_decision": "cannot_approve",
+  "expected_agent_message": "Found 30+ violations across 5 categories. This code needs comprehensive cleanup: naming conventions, import organization, type annotations, formatting, and best practices. Major refactoring required before approval.",
+
+  "scoring_notes": {
+    "perfect_score_criteria": [
+      "Identifies violations across ALL 5 categories (naming, imports, types, formatting, practices)",
+      "Recognizes this code has pervasive quality issues",
+      "Provides specific examples from each category",
+      "Decision is cannot_approve/major_refactor_required",
+      "Prioritizes fixes appropriately (types/naming first, then formatting)"
+    ],
+
+    "common_mistakes": [
+      "Missing entire violation categories (-10 pts per category)",
+      "Only flagging one type of issue (-25 pts)",
+      "Not recognizing severity of combined violations (-15 pts)",
+      "Approving with minor fixes suggestion (-30 pts)",
+      "Not providing comprehensive fix guidance (-10 pts)"
+    ],
+
+    "edge_cases": [
+      "Agent doesn't need exact violation count (ballpark is fine)",
+      "Agent may prioritize categories differently (OK)",
+      "Agent may identify additional issues (OK)",
+      "Key is comprehensive detection across all categories"
+    ]
+  },
+
+  "metadata": {
+    "difficulty": "hard",
+    "category": "comprehensive_validation",
+    "real_world_scenario": "Legacy code or rushed implementation with multiple quality issues",
+    "created": "2025-11-09",
+    "last_modified": "2025-11-09"
+  }
+}

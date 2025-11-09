@@ -1,0 +1,103 @@
+{
+  "test_id": "test-05",
+  "test_name": "Format Errors (Multiple Issues)",
+  "description": "Comprehensive test - agent must detect 5+ different issues",
+
+  "expected_result": "fix_required",
+
+  "expected_issues": {
+    "critical": [
+      "title_has_unquoted_colon",
+      "description_too_short",
+      "no_h1_header",
+      "content_too_short",
+      "weak_call_to_action"
+    ],
+    "warnings": [],
+    "suggestions": [
+      "add_more_detail_to_sections",
+      "include_examples_or_case_studies"
+    ]
+  },
+
+  "must_catch_issues": [
+    "Title contains unquoted colon (YAML syntax error - will break parser)",
+    "Description is only 13 characters ('Cut costs now') - needs to be 120-160 chars",
+    "No H1 header in markdown (content starts with H2)",
+    "Content is very short (~150 words vs 500+ expected for blog post)",
+    "Weak/vague CTA ('Start today' without specific action or link)"
+  ],
+
+  "expected_fixes": [
+    "Quote the title in YAML: title: \"BYOD Digital Signage: Save Money on Displays\"",
+    "Expand description to 120-160 chars with compelling copy about BYOD benefits",
+    "Add H1 header matching the title before first H2",
+    "Expand content to at least 500 words (needs real value, not filler)",
+    "Improve CTA with specific action, value prop, and link"
+  ],
+
+  "validation_checks": {
+    "yaml_syntax": {
+      "expected": "valid YAML syntax",
+      "actual": "unquoted colon in title field",
+      "status": "fail"
+    },
+    "description_length": {
+      "expected": "120-160 characters",
+      "actual": "13 characters",
+      "status": "fail"
+    },
+    "has_h1_header": {
+      "expected": "H1 header present",
+      "actual": "starts with H2",
+      "status": "fail"
+    },
+    "content_length": {
+      "expected": "500+ words",
+      "actual": "~150 words",
+      "status": "fail"
+    },
+    "has_strong_cta": {
+      "expected": "specific call-to-action",
+      "actual": "vague ('Start today')",
+      "status": "fail"
+    }
+  },
+
+  "expected_agent_decision": "cannot_publish",
+  "expected_agent_message": "Found 5 critical issues. This content has YAML syntax errors (will break build), missing required elements, and is too brief to provide value. Needs significant work before publishing.",
+
+  "scoring_notes": {
+    "perfect_score_criteria": [
+      "Detects YAML syntax error (CRITICAL - build-breaking)",
+      "Detects description too short",
+      "Detects missing H1 header",
+      "Detects very short content",
+      "Detects weak CTA",
+      "Provides specific fixes for each issue",
+      "Correct decision: cannot_publish/fix_required"
+    ],
+
+    "common_mistakes": [
+      "Missing YAML syntax error (-20 pts - this breaks the build)",
+      "Not catching missing H1 header (-5 pts)",
+      "Not flagging short description (-10 pts)",
+      "Vague recommendations (-5 pts)",
+      "Incorrect decision (-10 pts)"
+    ],
+
+    "edge_cases": [
+      "Agent may identify additional minor issues (OK)",
+      "Agent may prioritize issues differently (OK if all critical ones caught)",
+      "Exact wording of recommendations may vary (OK if actionable)"
+    ]
+  },
+
+  "metadata": {
+    "difficulty": "hard",
+    "category": "comprehensive_validation",
+    "real_world_scenario": "Rushed draft with multiple quality issues - common when writing quickly",
+    "created": "2025-11-09",
+    "last_modified": "2025-11-09"
+  }
+}

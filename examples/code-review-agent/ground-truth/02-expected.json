@@ -1,0 +1,188 @@
+{
+  "test_id": "test-02",
+  "test_name": "Naming Convention Violations",
+  "description": "Validate that agent detects snake_case and other naming violations",
+
+  "expected_result": "fix_required",
+
+  "expected_issues": {
+    "critical": [
+      "constants_using_snake_case",
+      "class_using_camelCase",
+      "interface_using_snake_case",
+      "type_alias_using_snake_case",
+      "method_names_using_snake_case",
+      "variable_names_using_snake_case",
+      "function_names_using_snake_case"
+    ],
+    "warnings": [],
+    "suggestions": []
+  },
+
+  "must_catch_issues": [
+    "Constants max_retry_attempts and default_timeout_ms should use UPPER_CASE (MAX_RETRY_ATTEMPTS, DEFAULT_TIMEOUT_MS)",
+    "Interface user_credentials should use PascalCase (UserCredentials)",
+    "Interface properties user_name and remember_me should use camelCase (userName, rememberMe)",
+    "Type alias auth_result should use PascalCase (AuthResult)",
+    "Type property expires_at should use camelCase (expiresAt)",
+    "Class authenticationService should use PascalCase (AuthenticationService)",
+    "Class properties database_service and session_timeout should use camelCase",
+    "Methods authenticate_user, verify_password, generate_token, calculate_expiration should use camelCase",
+    "Variables is_password_valid, expires_at, expiration_ms should use camelCase",
+    "Function create_authentication_handler should use camelCase (createAuthenticationHandler)",
+    "Parameter auth_service should use camelCase (authService)"
+  ],
+
+  "naming_violations": [
+    {
+      "line_approx": 9,
+      "identifier": "max_retry_attempts",
+      "issue": "Constant using snake_case instead of UPPER_CASE",
+      "expected": "MAX_RETRY_ATTEMPTS",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 10,
+      "identifier": "default_timeout_ms",
+      "issue": "Constant using snake_case instead of UPPER_CASE",
+      "expected": "DEFAULT_TIMEOUT_MS",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 13,
+      "identifier": "user_credentials",
+      "issue": "Interface using snake_case instead of PascalCase",
+      "expected": "UserCredentials",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 14,
+      "identifier": "user_name",
+      "issue": "Property using snake_case instead of camelCase",
+      "expected": "userName",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 16,
+      "identifier": "remember_me",
+      "issue": "Property using snake_case instead of camelCase",
+      "expected": "rememberMe",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 20,
+      "identifier": "auth_result",
+      "issue": "Type using snake_case instead of PascalCase",
+      "expected": "AuthResult",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 23,
+      "identifier": "expires_at",
+      "issue": "Property using snake_case instead of camelCase",
+      "expected": "expiresAt",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 27,
+      "identifier": "authenticationService",
+      "issue": "Class using camelCase instead of PascalCase",
+      "expected": "AuthenticationService",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 29,
+      "identifier": "database_service",
+      "issue": "Property using snake_case instead of camelCase",
+      "expected": "databaseService",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 30,
+      "identifier": "session_timeout",
+      "issue": "Property using snake_case instead of camelCase",
+      "expected": "sessionTimeout",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 37,
+      "identifier": "authenticate_user",
+      "issue": "Method using snake_case instead of camelCase",
+      "expected": "authenticateUser",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 70,
+      "identifier": "verify_password",
+      "issue": "Method using snake_case instead of camelCase",
+      "expected": "verifyPassword",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 74,
+      "identifier": "generate_token",
+      "issue": "Method using snake_case instead of camelCase",
+      "expected": "generateToken",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 78,
+      "identifier": "calculate_expiration",
+      "issue": "Method using snake_case instead of camelCase",
+      "expected": "calculateExpiration",
+      "severity": "critical"
+    },
+    {
+      "line_approx": 84,
+      "identifier": "create_authentication_handler",
+      "issue": "Function using snake_case instead of camelCase",
+      "expected": "createAuthenticationHandler",
+      "severity": "critical"
+    }
+  ],
+
+  "expected_fixes": [
+    "Rename all constants to UPPER_CASE (MAX_RETRY_ATTEMPTS, DEFAULT_TIMEOUT_MS)",
+    "Rename interfaces and types to PascalCase (UserCredentials, AuthResult)",
+    "Rename interface/type properties to camelCase (userName, rememberMe, expiresAt)",
+    "Rename class to PascalCase (AuthenticationService)",
+    "Rename all class properties and methods to camelCase",
+    "Rename functions to camelCase (createAuthenticationHandler)",
+    "Rename all variables to camelCase throughout"
+  ],
+
+  "expected_agent_decision": "cannot_approve",
+  "expected_agent_message": "Found 15+ naming convention violations. All TypeScript identifiers must follow conventions: UPPER_CASE for constants, PascalCase for classes/interfaces/types, camelCase for everything else.",
+
+  "scoring_notes": {
+    "perfect_score_criteria": [
+      "Identifies that naming conventions are violated (doesn't need exact count)",
+      "Flags snake_case usage in multiple contexts (constants, classes, methods, variables)",
+      "Recognizes pattern of violations throughout file",
+      "Decision is cannot_approve/fix_required",
+      "Provides guidance on correct naming conventions"
+    ],
+
+    "common_mistakes": [
+      "Missing the naming violations entirely (-30 pts - this is the main test)",
+      "Only flagging some violations, not recognizing pattern (-15 pts)",
+      "Not categorizing by severity correctly (-5 pts)",
+      "Approving code despite violations (-25 pts)",
+      "Not providing specific renaming guidance (-5 pts)"
+    ],
+
+    "edge_cases": [
+      "Agent doesn't need to count exact violations (approximate is fine)",
+      "Agent may also flag other minor issues (OK)",
+      "Different terminology for naming conventions acceptable"
+    ]
+  },
+
+  "metadata": {
+    "difficulty": "medium",
+    "category": "naming_conventions",
+    "real_world_scenario": "Python/JavaScript developer new to TypeScript, using familiar snake_case patterns",
+    "created": "2025-11-09",
+    "last_modified": "2025-11-09"
+  }
+}

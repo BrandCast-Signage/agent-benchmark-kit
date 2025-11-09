@@ -1,0 +1,146 @@
+{
+  "test_id": "test-03",
+  "test_name": "Import Organization Issues",
+  "description": "Validate that agent detects disorganized and unsorted imports",
+
+  "expected_result": "fix_required",
+
+  "expected_issues": {
+    "critical": [
+      "imports_not_sorted",
+      "imports_not_grouped",
+      "type_imports_not_using_import_type",
+      "builtin_imports_not_first"
+    ],
+    "warnings": [],
+    "suggestions": [
+      "organize_imports_into_groups",
+      "sort_alphabetically_within_groups"
+    ]
+  },
+
+  "must_catch_issues": [
+    "Imports are not sorted alphabetically",
+    "Third-party and local imports are mixed together (should be grouped)",
+    "Built-in Node.js imports (events, fs) should come before third-party imports",
+    "Type-only imports should use 'import type' syntax (UserProfile, AuthConfig)",
+    "Imports scattered throughout instead of grouped at top"
+  ],
+
+  "import_violations": [
+    {
+      "issue": "Import order incorrect",
+      "description": "zod imported before express, should be alphabetical",
+      "severity": "critical"
+    },
+    {
+      "issue": "Local imports mixed with third-party",
+      "description": "logger imported between express and axios",
+      "severity": "critical"
+    },
+    {
+      "issue": "Built-in imports should come first",
+      "description": "EventEmitter and fs imported after third-party and local imports",
+      "severity": "critical"
+    },
+    {
+      "issue": "Type imports not using 'import type'",
+      "description": "UserProfile and AuthConfig should use 'import type' syntax",
+      "severity": "warning"
+    },
+    {
+      "issue": "Missing grouping",
+      "description": "Should have distinct groups: built-in, third-party, local",
+      "severity": "critical"
+    }
+  ],
+
+  "expected_import_order": [
+    "Built-in Node.js modules (events, fs)",
+    "Third-party packages (axios, express, zod)",
+    "Local modules (../services/*, ../types/*, ../utils/*)",
+    "Type-only imports should use 'import type' syntax"
+  ],
+
+  "expected_fixes": [
+    "Group imports into sections: built-in → third-party → local",
+    "Sort alphabetically within each group",
+    "Use 'import type' for type-only imports (UserProfile, AuthConfig)",
+    "Add blank lines between groups for readability",
+    "Example correct order:",
+    "  // Built-in",
+    "  import { EventEmitter } from 'events';",
+    "  import * as fs from 'fs';",
+    "  ",
+    "  // Third-party",
+    "  import axios from 'axios';",
+    "  import { Request, Response } from 'express';",
+    "  import { z } from 'zod';",
+    "  ",
+    "  // Local",
+    "  import { CacheService } from '../services/cache';",
+    "  import { DatabaseService } from '../services/database';",
+    "  import type { AuthConfig } from '../types/config';",
+    "  import type { UserProfile } from '../types/user';",
+    "  import { logger } from '../utils/logger';"
+  ],
+
+  "validation_checks": {
+    "import_grouping": {
+      "expected": "built-in, third-party, local groups",
+      "actual": "mixed together without grouping",
+      "status": "fail"
+    },
+    "import_sorting": {
+      "expected": "alphabetical within groups",
+      "actual": "unsorted",
+      "status": "fail"
+    },
+    "type_imports": {
+      "expected": "use 'import type' syntax",
+      "actual": "regular imports for types",
+      "status": "fail"
+    },
+    "builtin_first": {
+      "expected": "built-in imports before third-party",
+      "actual": "built-in imports after third-party and local",
+      "status": "fail"
+    }
+  },
+
+  "expected_agent_decision": "cannot_approve",
+  "expected_agent_message": "Import organization issues detected. Imports should be grouped (built-in → third-party → local) and sorted alphabetically within each group. Use 'import type' for type-only imports.",
+
+  "scoring_notes": {
+    "perfect_score_criteria": [
+      "Identifies that imports are not grouped correctly",
+      "Detects that imports are not sorted alphabetically",
+      "Flags built-in imports appearing after third-party/local",
+      "Suggests using 'import type' for type-only imports",
+      "Decision is cannot_approve/fix_required",
+      "Provides clear guidance on correct organization"
+    ],
+
+    "common_mistakes": [
+      "Missing the import organization issue entirely (-25 pts)",
+      "Only flagging sorting, not grouping (-10 pts)",
+      "Not recognizing built-in imports should come first (-10 pts)",
+      "Approving code despite import issues (-20 pts)",
+      "Not providing specific reorganization guidance (-5 pts)"
+    ],
+
+    "edge_cases": [
+      "Agent may have different preferences for exact grouping style (OK)",
+      "Agent may also flag other minor issues (OK)",
+      "Key is recognizing the disorganization and providing actionable fix"
+    ]
+  },
+
+  "metadata": {
+    "difficulty": "medium",
+    "category": "import_organization",
+    "real_world_scenario": "Code that evolved over time with imports added ad-hoc without reorganization",
+    "created": "2025-11-09",
+    "last_modified": "2025-11-09"
+  }
+}
