@@ -1,0 +1,86 @@
+{
+  "test_id": "test-XX",
+  "test_name": "Descriptive Test Name",
+  "description": "Brief description of what this test validates",
+
+  "expected_result": "ready_to_publish",
+  "_comment_expected_result": "Values: 'ready_to_publish', 'fix_required', 'cannot_publish', or agent-specific",
+
+  "expected_issues": {
+    "critical": [
+      "issue_identifier_1",
+      "issue_identifier_2"
+    ],
+    "warnings": [
+      "warning_identifier_1"
+    ],
+    "suggestions": [
+      "suggestion_identifier_1"
+    ]
+  },
+
+  "must_catch_issues": [
+    "Human-readable description of critical issue agent MUST detect",
+    "Another critical issue description",
+    "Build-breaking or showstopper issues go here"
+  ],
+
+  "expected_fixes": [
+    "Specific fix recommendation agent should provide",
+    "Another expected fix",
+    "Actionable next steps"
+  ],
+
+  "validation_checks": {
+    "_comment": "Define specific validations the agent should perform",
+
+    "check_name_1": {
+      "expected": "Expected value or state",
+      "status": "pass",
+      "_comment": "Values: 'pass', 'fail', 'n/a'"
+    },
+
+    "check_name_2": {
+      "expected": "Another validation",
+      "actual": "Actual value if known",
+      "status": "fail"
+    }
+  },
+
+  "expected_agent_decision": "approve",
+  "_comment_decision": "Values: 'approve', 'flag', 'reject', or agent-specific",
+
+  "expected_agent_message": "Expected summary message from agent",
+
+  "scoring_notes": {
+    "_comment": "Guidance for the judge on how to score this test",
+
+    "perfect_score_criteria": [
+      "Detects all critical issues",
+      "No false positives",
+      "Provides specific, actionable recommendations"
+    ],
+
+    "common_mistakes": [
+      "Missing issue X (deduct Y points)",
+      "Vague recommendation for issue Z (deduct W points)"
+    ],
+
+    "edge_cases": [
+      "Agent might interpret X as Y (acceptable if justified)"
+    ]
+  },
+
+  "metadata": {
+    "difficulty": "medium",
+    "_comment_difficulty": "Values: 'easy', 'medium', 'hard'",
+
+    "category": "quality_validation",
+    "_comment_category": "What aspect this primarily tests",
+
+    "real_world_scenario": "Description of actual use case this represents",
+
+    "created": "2025-11-09",
+    "last_modified": "2025-11-09"
+  }
+}

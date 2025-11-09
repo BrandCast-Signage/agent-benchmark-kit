@@ -1,0 +1,46 @@
+# Agent Benchmark Registry
+# Central configuration for all benchmarked agents
+
+agents:
+  # Example marketing agent
+  example-marketing-agent:
+    name: "example-marketing-agent"
+    location: "marketing"
+    description: "Brief description of what this agent does"
+    test_suite: "~/.agent-benchmarks/example-marketing-agent/"
+    baseline_score: null  # Set after first run
+    target_score: 85  # Desired performance level
+    status: "pending"  # Values: "pending", "active", "production", "archived"
+
+  # Example tech agent
+  example-tech-agent:
+    name: "example-tech-agent"
+    location: "tech"
+    repo: "org/repository-name"  # Optional: for multi-repo setups
+    description: "Code review for TypeScript"
+    test_suite: "~/.agent-benchmarks/example-tech-agent/"
+    baseline_score: 82
+    target_score: 90
+    status: "active"
+
+# Test Rotation Configuration
+test_rotation:
+  enabled: true
+  rotation_threshold: 95  # Rotate if agent scores 95+ on all tests
+  retirement_threshold: 100  # Retire test after 3 consecutive 100s
+  max_active_tests: 7  # Maximum tests per agent
+  min_active_tests: 3  # Minimum tests per agent
+
+# Benchmark Schedule (optional - for automation)
+schedule:
+  frequency: "weekly"  # Options: "daily", "weekly", "monthly", "manual"
+  day: "monday"  # For weekly
+  time: "09:00"  # UTC time
+  agents: "all"  # Run all agents or specify subset
+
+# Global Configuration
+global:
+  pass_threshold: 80  # Default pass threshold (can override per agent)
+  timeout: 300  # Test execution timeout in seconds (5 minutes)
+  retry_on_failure: true  # Retry failed tests once
+  verbose_logging: false  # Enable detailed logs
