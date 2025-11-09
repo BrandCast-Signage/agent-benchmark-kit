@@ -9,7 +9,7 @@
 
 ## Why This Exists
 
-We built AI agents at [BrandCast](https://brandcast.app) for SEO optimization, content publishing, and weekly planning. They needed rigorous quality checks, but manual testing was time-consuming and inconsistent.
+We built AI agents at [BrandCast](https://brandcast.app) for SEO optimization, content publishing, weekly planning, as well as our technical agent fleet. They needed rigorous quality checks and continuous improvement, but manual testing was time-consuming and inconsistent.
 
 So we built an automated benchmarking system using **AI to evaluate AI**.
 
@@ -20,10 +20,15 @@ We're still very early, but the approach shows promise. We're open-sourcing what
 ## What You Get
 
 ✅ **Slash command** - `/benchmark-agent` for one-command testing
+
 ✅ **Test suite creator** - Generate your first benchmark in < 1 hour
+
 ✅ **LLM-as-judge** - Automated, objective scoring
+
 ✅ **Performance tracking** - JSON-based history over time
+
 ✅ **Test rotation** - Keep agents challenged with fresh tests
+
 ✅ **Complete examples** - 2 production-tested benchmark suites
 
 ---
