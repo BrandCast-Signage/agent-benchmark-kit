@@ -1,22 +1,14 @@
 {
+  "name": "agent-benchmark-kit",
+  "owner": {
+    "name": "BrandCast",
+    "email": "hello@brandcast.app"
+  },
   "plugins": [
     {
       "name": "agent-benchmark-kit",
-      "source": "https://github.com/BrandCast-Signage/agent-benchmark-kit",
-      "description": "Automated quality assurance for Claude Code agents using LLM-as-judge evaluation",
-      "version": "1.0.0",
-      "author": {
-        "name": "BrandCast",
-        "url": "https://brandcast.app"
-      },
-      "keywords": [
-        "benchmarking",
-        "testing",
-        "quality-assurance",
-        "llm-as-judge",
-        "agents",
-        "evaluation"
-      ]
+      "source": "./",
+      "description": "Automated quality assurance for Claude Code agents using LLM-as-judge evaluation"
     }
   ]
 }
