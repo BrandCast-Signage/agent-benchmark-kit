@@ -260,7 +260,7 @@ cd agent-benchmark-kit
 
 The install script:
 1. Copies agents to `.claude/agents/`
-2. Copies skill to `.claude/skills/benchmark-agent/`
+2. Copies slash command to `.claude/commands/`
 3. Creates `~/.agent-benchmarks/` directory
 4. Sets up templates and examples
 

@@ -41,7 +41,7 @@ cd agent-benchmark-kit
 
 The installer will:
 - Copy agents to `~/.claude/agents/`
-- Install `/benchmark-agent` skill
+- Install `/benchmark-agent` command
 - Set up templates in `~/.agent-benchmarks/`
 - Optionally install example benchmarks
 
@@ -52,12 +52,12 @@ If you prefer manual installation:
 ```bash
 # Create directories
 mkdir -p ~/.claude/agents
-mkdir -p ~/.claude/skills/benchmark-agent
+mkdir -p ~/.claude/commands
 mkdir -p ~/.agent-benchmarks/{templates,examples,registries}
 
 # Copy files
 cp agents/*.md ~/.claude/agents/
-cp skills/benchmark-agent/SKILL.md ~/.claude/skills/benchmark-agent/
+cp commands/benchmark-agent.md ~/.claude/commands/
 cp templates/*.{md,json,yml} ~/.agent-benchmarks/templates/
 ```
 

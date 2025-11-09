@@ -51,11 +51,11 @@ cp "$REPO_DIR/agents/benchmark-judge.md" "$CLAUDE_DIR/agents/"
 cp "$REPO_DIR/agents/benchmark-orchestrator.md" "$CLAUDE_DIR/agents/"
 echo -e "${GREEN}✓${NC} Installed 3 agents to ~/.claude/agents/"
 
-# Copy skill
-echo "⚡ Installing /benchmark-agent skill..."
-mkdir -p "$CLAUDE_DIR/skills/benchmark-agent"
-cp "$REPO_DIR/skills/benchmark-agent/SKILL.md" "$CLAUDE_DIR/skills/benchmark-agent/"
-echo -e "${GREEN}✓${NC} Installed skill to ~/.claude/skills/benchmark-agent/"
+# Copy slash command
+echo "⚡ Installing /benchmark-agent command..."
+mkdir -p "$CLAUDE_DIR/commands"
+cp "$REPO_DIR/commands/benchmark-agent.md" "$CLAUDE_DIR/commands/"
+echo -e "${GREEN}✓${NC} Installed command to ~/.claude/commands/"
 
 # Copy templates
 echo "📋 Installing templates..."
@@ -91,7 +91,7 @@ echo -e "${GREEN}✅ Installation complete!${NC}"
 echo ""
 echo "📚 What's installed:"
 echo "  • 3 benchmark agents in ~/.claude/agents/"
-echo "  • /benchmark-agent skill in ~/.claude/skills/"
+echo "  • /benchmark-agent command in ~/.claude/commands/"
 echo "  • Templates in ~/.agent-benchmarks/templates/"
 if [[ $install_examples =~ ^[Yy]$ ]]; then
     echo "  • 2 example benchmarks in ~/.agent-benchmarks/examples/"
