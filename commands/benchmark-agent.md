@@ -1,7 +1,5 @@
-# /benchmark-agent
-
-Run automated benchmark tests on Claude Code agents and track performance over time.
-
+---
+description: Run automated benchmark tests on Claude Code agents and track performance over time
 ---
 
 ## Usage
