@@ -13,7 +13,7 @@ We built AI agents at [BrandCast](https://brandcast.app) for SEO optimization, c
 
 So we built an automated benchmarking system using **AI to evaluate AI**.
 
-It worked so well, we're open-sourcing it.
+We're still very early, but the approach shows promise. We're open-sourcing what we've built so far.
 
 ---
 
@@ -31,24 +31,20 @@ It worked so well, we're open-sourcing it.
 ## Quick Start
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/BrandCast-Signage/agent-benchmark-kit.git
-cd agent-benchmark-kit
+# 1. Install via Claude Code
+/plugin marketplace add https://github.com/BrandCast-Signage/agent-benchmark-kit
 
-# 2. Install the skill
-./scripts/install.sh
-
-# 3. Create your first benchmark
+# 2. Create your first benchmark
 /benchmark-agent --create my-agent
 
-# 4. Answer questions about your agent
+# 3. Answer 5 questions about your agent
 # [Interactive prompts guide you through test creation]
 
-# 5. Run the benchmark
+# 4. Run the benchmark
 /benchmark-agent my-agent
 
-# 6. View results
-cat ~/.agent-benchmarks/my-agent/results/summary.md
+# 5. View results and iterate
+# Results show score breakdown and recommendations
 ```
 
 ---
@@ -102,7 +98,7 @@ Use data to guide prompt improvements. Re-run to validate changes.
 
 ## Key Features
 
-### 🎯 Test Suite Creator (Killer Feature)
+### 🎯 Interactive Test Suite Creator
 
 **Problem:** Creating test cases manually is hard and time-consuming.
 
@@ -228,7 +224,20 @@ Reviews TypeScript code for style violations and best practices.
 - Git
 - Bash (Linux/macOS) or Git Bash (Windows)
 
-### Install Script
+### Option 1: Add via Claude Code Plugin Marketplace (Recommended)
+
+```bash
+# In Claude Code, run:
+/plugin marketplace add https://github.com/BrandCast-Signage/agent-benchmark-kit
+```
+
+This will:
+1. Clone the repository
+2. Install skill and agents automatically
+3. Set up templates and examples
+4. Create `~/.agent-benchmarks/` directory
+
+### Option 2: Install Script
 
 ```bash
 git clone https://github.com/BrandCast-Signage/agent-benchmark-kit.git
@@ -242,7 +251,9 @@ The install script:
 3. Creates `~/.agent-benchmarks/` directory
 4. Sets up templates and examples
 
-**Manual installation:** See [docs/installation.md](docs/installation.md)
+### Manual Installation
+
+See [docs/getting-started.md](docs/getting-started.md) for manual setup instructions.
 
 ---
 
