@@ -6,10 +6,7 @@
     "name": "BrandCast",
     "url": "https://brandcast.app"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/BrandCast-Signage/agent-benchmark-kit"
-  },
+  "repository": "https://github.com/BrandCast-Signage/agent-benchmark-kit",
   "license": "MIT",
   "keywords": [
     "benchmarking",
